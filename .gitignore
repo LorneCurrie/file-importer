@@ -4,3 +4,9 @@ jspm_packages
 
 # Serverless directories
 .serverless
+
+# Typescript build folder
+.build
+
+# Don'c commit any of the config files
+./config/config.*.json
