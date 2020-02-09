@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "mapRoot": "build",
+    "outDir": "build",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "typings/*",
+        "*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "test"
+  ]
+}
