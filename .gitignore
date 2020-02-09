@@ -9,4 +9,4 @@ jspm_packages
 .build
 
 # Don'c commit any of the config files
-./config/config.*.json
+config/config.*.json

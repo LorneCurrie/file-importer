@@ -3,8 +3,8 @@
     "preserveConstEnums": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "mapRoot": "build",
-    "outDir": "build",
+    "mapRoot": ".build",
+    "outDir": ".build",
     "target": "es2017",
     "moduleResolution": "node",
     "module": "commonjs",
@@ -16,7 +16,7 @@
       "node",
       "jest"
     ],
-    "baseUrl": ".",
+    "baseUrl": "./src/",
     "paths": {
       "*": [
         "typings/*",
