@@ -10,12 +10,26 @@ provider:
 
   environment:
     S3_INPUT_BUCKET_NAME: ${file(./config/config.${self:provider.stage}.json):fileUploadBucketName}
+    LOG_LEVEL: ${file(./config/config.${self:provider.stage}.json):logLevel}
+    RADIUS_SUBSCRIBER_TABLE_NAME: ${file(./config/config.${self:provider.stage}.json):radiusSubscriberTableName}
+    RADIUS_SUBSCRIBER_TABLE_ARN: ${file(./config/config.${self:provider.stage}.json):radiusSubscriberTableNameArn}
+    DYNAMO_DB_REGION: ${file(./config/config.${self:provider.stage}.json):radiusSubscriberTableRegion}
 
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:*
       Resource: "arn:aws:s3:::${self:provider.environment.S3_INPUT_BUCKET_NAME}/*"
+    - Effect: Allow
+      Action: 
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem 
+      Resource: ${self:provider.environment.RADIUS_SUBSCRIBER_TABLE_ARN}
+
 
 functions:
   inputBucketTrigger:
@@ -23,5 +37,24 @@ functions:
     events:
       - s3:
           bucket: ${self:provider.environment.S3_INPUT_BUCKET_NAME}
-          event: s3:ObjectRemoved:*
+          event: s3:ObjectCreated:*
 
+resources:
+      Resources:
+        usersTable: 
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: ${self:provider.environment.RADIUS_SUBSCRIBER_TABLE_NAME}
+            AttributeDefinitions:
+              - AttributeName: PortAuthToken
+                AttributeType: S
+              - AttributeName: Username
+                AttributeType: S
+            KeySchema:
+              - AttributeName: PortAuthToken
+                KeyType: HASH
+              - AttributeName: Username
+                KeyType: RANGE
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1

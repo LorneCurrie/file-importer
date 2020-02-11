@@ -1,0 +1,7 @@
+port_auth_token,username,password,ip_address_type,ipv6_enabled,static_ipv4_address,static_ipv6_address,status
+"1234567890","bob@acme.com","password123","dynamic",false,,,"active"
+"abcdefghij","jane@acme.com","letmein","dynamic",true,,,"active"
+"0987654321","john@acme.com","boohoo","dynamic",false,,,"suspended"
+"jihgfedcba","lucy@acme.com","whatsmypassword","static",false,"200.0.0.3",,"active"
+"12345abcde","warren@acme.com","myweakpassword","static",true,"200.0.0.3","2001:db8:0:100::/56","active"
+"jihgfedcba","lucy@acme.com","whatsmypassword","static",false,"200.0.0.4",,"suspended"

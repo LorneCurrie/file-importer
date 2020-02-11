@@ -11,8 +11,15 @@ export class S3Client {
     })
   }
 
-  public getFile = (objectPath: string) => { }
+  public getFile = (key: string) => this.getObject(key).promise()
+  public getFileStream = (key: string) => this.getObject(key).createReadStream()
+
   public listFiles = (objectPath: string = '/') => { }
   public moveFile = (fromObjectPath: string, toObjectPath: string) => { }
 
+  private getObject = (key: string) =>
+    this.client.getObject({
+      Bucket: this.bucket,
+      Key: key,
+    })
 }

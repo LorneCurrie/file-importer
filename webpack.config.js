@@ -11,7 +11,6 @@ module.exports = {
   },
   externals: {
     'aws-sdk': 'aws-sdk',
-    // Possible drivers for knex - ignore the ones not used in this project
   },
   target: 'node',
   module: {

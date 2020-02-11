@@ -1,3 +1,6 @@
 {
-  "fileUploadBucketName":""
+  "fileUploadBucketName":"",
+  "logLevel":"info"
+  "radius_subscriber_table_name":"",
+  "radiusSubscriberTableRegion":""
 }
