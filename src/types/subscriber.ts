@@ -1,7 +1,6 @@
-
-
 export type ipAddressType = string | 'dynamic' | 'static';
 export type statusType = string | 'active' | 'suspended' | 'relinquished';
+
 export interface ISubscriberInput {
   port_auth_token: string;
   username: string;
@@ -19,4 +18,9 @@ export interface ISubscriberDynamoDb {
   password: { S: string };
   groupname: { S: string };
   reply: { M: { [key: string]: string } }
+}
+
+export interface IStaticIpAddress {
+  ipv4?: { S: string };
+  ipv6?: { S: string };
 }

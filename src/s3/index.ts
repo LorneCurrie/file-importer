@@ -1,4 +1,6 @@
-import { S3 } from 'aws-sdk';
+import { AWSError, S3, Request } from 'aws-sdk';
+import { PromiseResult } from 'aws-sdk/lib/request';
+import { Readable } from 'stream';
 
 export class S3Client {
 
@@ -11,13 +13,10 @@ export class S3Client {
     })
   }
 
-  public getFile = (key: string) => this.getObject(key).promise()
-  public getFileStream = (key: string) => this.getObject(key).createReadStream()
+  public getFile = (key: string): Promise<PromiseResult<S3.GetObjectOutput, AWSError>> => this.getObject(key).promise();
+  public getFileStream = (key: string): Readable => this.getObject(key).createReadStream();
 
-  public listFiles = (objectPath: string = '/') => { }
-  public moveFile = (fromObjectPath: string, toObjectPath: string) => { }
-
-  private getObject = (key: string) =>
+  private getObject = (key: string): Request<S3.GetObjectOutput, AWSError> =>
     this.client.getObject({
       Bucket: this.bucket,
       Key: key,

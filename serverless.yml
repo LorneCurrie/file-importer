@@ -18,7 +18,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - s3:*
+        - s3:PutObject
+        - s3:GetObject
       Resource: "arn:aws:s3:::${self:provider.environment.S3_INPUT_BUCKET_NAME}/*"
     - Effect: Allow
       Action: 

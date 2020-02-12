@@ -16,7 +16,7 @@ const onComplete = () => {
 }
 
 export const bucketFileTrigger = async (event, context, callback) => {
-  if (event && event.Records && isArray(event.Records)) {
+  if (event && event.Records && Array.isArray(event.Records)) {
     const radiusDoa = new RadiusDao(new DynamoDbClient());
     for (const r of event.Records) {
       const s3Client = new S3Client(r.s3.bucket.name);
@@ -28,7 +28,7 @@ export const bucketFileTrigger = async (event, context, callback) => {
         return data
       }, onError, onComplete)
       logger.debug('jsonData', { dataJson })
-      // write to Dynamo DB here
+      // TODO: move the file to completed folder.
     }
   }
 

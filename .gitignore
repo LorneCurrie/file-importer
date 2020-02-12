@@ -7,6 +7,8 @@ jspm_packages
 
 # Typescript build folder
 .build
+# IDE folders
+.idea
 
 # Don'c commit any of the config files
 config/config.*.json

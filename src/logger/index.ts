@@ -1,4 +1,5 @@
 import * as winston from 'winston';
+
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 export class Logger {
@@ -19,44 +20,44 @@ export class Logger {
   }
 
 
-  public debug(msg: string, data?: any, context?: any, event?: any) {
+  public debug(msg: string, data?: any, context?: any, event?: any): void {
     msg = this.prepMsg(msg, event);
     this.log('debug', msg, data, context, event);
   }
 
-  public info(msg: string, data?: any, context?: any, event?: any) {
+  public info(msg: string, data?: any, context?: any, event?: any): void {
     msg = this.prepMsg(msg, event);
     this.log('info', msg, data, context, event);
   }
 
-  public warn(msg: string, data?: any, context?: any, event?: any) {
+  public warn(msg: string, data?: any, context?: any, event?: any): void {
     msg = this.prepMsg(msg, event);
     this.log('warn', msg, data, context, event);
   }
 
-  public error(msg: string, data?: any, context?: any, event?: any) {
+  public error(msg: string, data?: any, context?: any, event?: any): void {
     msg = this.prepMsg(msg, event);
     this.log('error', msg, data, context, event);
   }
 
 
-  private configureWinston() {
+  private configureWinston(): void {
     const prettyPrint = winston.format.printf(info => {
       return JSON.stringify(info);
     });
     this.logger = winston.createLogger({
       level: process.env.LOG_LEVEL || 'info',
       format: prettyPrint,
-      transports: [new winston.transports.Console()],
+      transports: [ new winston.transports.Console() ],
     });
   }
 
-  private log(level: LogLevel, msg: string, data?: any, context?: any, event?: any) {
+  private log(level: LogLevel, msg: string, data?: any, context?: any, event?: any): void {
     this.configureWinston();
     this.logger.log(level, msg, data);
   }
 
-  private prepMsg(msg: string, event: any) {
+  private prepMsg(msg: string, event: any): string {
     msg = `${msg}`;
     if (event) {
       msg = `Path Parameters: ${JSON.stringify(event.pathParameters)} - Body: ${JSON.stringify(event.body)} - ${msg}`;

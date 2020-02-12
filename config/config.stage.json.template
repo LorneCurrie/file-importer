@@ -1,6 +1,7 @@
 {
-  "fileUploadBucketName":"",
-  "logLevel":"info"
-  "radius_subscriber_table_name":"",
-  "radiusSubscriberTableRegion":""
+    "fileUploadBucketName": "",
+    "logLevel": "debug",
+    "radiusSubscriberTableName": "",
+    "radiusSubscriberTableNameArn": "arn:aws:dynamodb:<region>:<aws::AccountId>:table/<radiusSubscriberTableName>",
+    "radiusSubscriberTableRegion": "<AWS::region>"
 }

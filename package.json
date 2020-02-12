@@ -7,7 +7,11 @@
     "test": "export NODE_ENV=test && jest",
     "build": "tsc",
     "lint": "tslint -p tsconfig.json",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "deploy:dev": "sls deploy -s dev",
+    "deploy:prod": "sls deploy -s prod",
+    "invoke:dev": "./invoke.sh dev",
+    "invoke:prod": "./invoke.sh prod"
   },
   "devDependencies": {
     "@types/jest": "^25.1.2",
