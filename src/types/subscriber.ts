@@ -10,14 +10,10 @@ export interface ISubscriberInput {
   static_ipv4_address: string | null;
   static_ipv6_address: string | null;
   status: string;
-};
+}
 
-export interface ISubscriberDynamoDb {
-  PortAuthToken: { S: string };
-  username: { S: string };
-  password: { S: string };
-  groupname: { S: string };
-  reply: { M: { [key: string]: string } }
+export interface ISubscriberErrors extends ISubscriberInput {
+  error:string
 }
 
 export interface IStaticIpAddress {

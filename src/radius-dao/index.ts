@@ -6,7 +6,7 @@ import { AWSError, DynamoDB } from 'aws-sdk';
 
 export class RadiusDao {
 
-  private store
+  private store: IStore;
 
   constructor(store: IStore) {
     this.store = store;
@@ -36,20 +36,24 @@ export class RadiusDao {
       if (ip_address_type === 'static') {
         return 'staticGroup';
       } else if (ip_address_type === 'dynamic' && ipv6_enabled === 'false') {
-        return 'dynamicNoIPv6Group';
+        return 'dynamicIPv4';
       }
     }
     return 'dynamicGroup';
   };
 
   private getStaticIpAddresses = (object: ISubscriberInput): IStaticIpAddress => {
-    const { static_ipv4_address, static_ipv6_address } = object;
+    const { static_ipv4_address, static_ipv6_address, ipv6_enabled } = object;
+    if(!static_ipv4_address) {
+      throw new Error('Must have a IPv4 address for static IP')
+    }
+    if(ipv6_enabled === 'true' && !static_ipv6_address) {
+      throw new Error('Should have a ipv6 if IPv6 is enabled')
+    }
     return {
       ...(static_ipv4_address && { ipv4: { S: static_ipv4_address } }),
       ...(static_ipv6_address && { ipv6: { S: static_ipv6_address } }),
     }
 
   }
-
-
 }

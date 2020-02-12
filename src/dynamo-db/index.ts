@@ -7,7 +7,7 @@ import { Logger } from '../logger';
 
 const logger = Logger.getInstance();
 
-export class DynamoDbClient implements IStore {
+export default class DynamoDbClient implements IStore {
 
   private client: DynamoDB;
 

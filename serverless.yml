@@ -20,6 +20,7 @@ provider:
       Action:
         - s3:PutObject
         - s3:GetObject
+        - s3:DeleteObject
       Resource: "arn:aws:s3:::${self:provider.environment.S3_INPUT_BUCKET_NAME}/*"
     - Effect: Allow
       Action: 
@@ -39,6 +40,9 @@ functions:
       - s3:
           bucket: ${self:provider.environment.S3_INPUT_BUCKET_NAME}
           event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/
+            - suffix: .csv
 
 resources:
       Resources:

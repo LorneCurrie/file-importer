@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "here"
 set -e
 set -o
 
@@ -17,4 +18,4 @@ echo "upload ${uploadFile} to s3://${bucketName}"
 
 # upload the file to the S3
 
-aws s3 cp $uploadFile s3://$bucketName
+aws s3 cp $uploadFile s3://$bucketName/uploads/
