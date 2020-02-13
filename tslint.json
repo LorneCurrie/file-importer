@@ -32,7 +32,7 @@
       ]
     },
     "no-var-requires": false,
-    "ordered-imports": false,
+    "ordered-imports": true,
     "quotemark": [
       true,
       "single"

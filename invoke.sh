@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "here"
-set -e
-set -o
+#set -e
+#set -o
 
 # upload a file to S3
 

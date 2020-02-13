@@ -1,8 +1,8 @@
-import { ISubscriberInput, IStaticIpAddress } from './../types/subscriber';
+import { AWSError, DynamoDB } from 'aws-sdk';
+import { PromiseResult } from 'aws-sdk/lib/request';
 import * as bcrypt from 'bcryptjs'
 import { IStore } from 'types/store';
-import { PromiseResult } from 'aws-sdk/lib/request';
-import { AWSError, DynamoDB } from 'aws-sdk';
+import { IStaticIpAddress, ISubscriberInput } from '../types/subscriber';
 
 export class RadiusDao {
 

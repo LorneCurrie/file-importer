@@ -1,7 +1,7 @@
+import { AWSError, DynamoDB } from 'aws-sdk';
+import { PromiseResult } from 'aws-sdk/lib/request';
 import * as _ from 'lodash';
 import * as R from 'ramda';
-import { DynamoDB, AWSError } from 'aws-sdk';
-import { PromiseResult } from 'aws-sdk/lib/request';
 import { IStore } from 'types/store';
 import { Logger } from '../logger';
 

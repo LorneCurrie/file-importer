@@ -1,4 +1,4 @@
-import { AWSError, S3, Request } from 'aws-sdk';
+import { AWSError, Request, S3 } from 'aws-sdk';
 import { PromiseResult } from 'aws-sdk/lib/request';
 import { Readable } from 'stream';
 import { Logger } from '../logger';

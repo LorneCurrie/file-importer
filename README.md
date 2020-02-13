@@ -9,9 +9,10 @@ Remote Authentication Dial-In User Service (RADIUS) Server is a centralized user
 ```  
 _REF:_ [SystemZone](https://systemzone.net/tag/radius-server-for-isp/)
 
-The use case is that the ISP will upload a CSV file to a S3 bucket whenever they have a new subscribers that are ready to start using their service. Loading the Subscribers data will allow the subscriber modem to authenticate and allow the subscriber to start binge on seasons 1-7 of Game Of Thrones (Season 8, pfft ), followed by seasons 1 - 2 of IT Crowd.
+The use case is that the ISP will upload a CSV file to a S3 bucket whenever they have a list of new subscribers that are ready to start using their service.
+Loading the Subscribers data will allow the subscriber modem to authenticate and allow the subscriber to start binging on seasons 1 to 7 of Game Of Thrones, followed by seasons 1 and 2 of IT Crowd.
 
-The minimum needed fields for a radius to work (don't quote me) are:
+The minimum needed fields for a RADIUS to work (don't quote me) are:
 
 - PortAuthToken: This is the ID for the physical connection between the subscriber and the network carrier
 - Username: subscribers unique username
@@ -23,20 +24,20 @@ The minimum needed fields for a radius to work (don't quote me) are:
 
 ### AWS Credentials
 
-Please make sure you have setup your AWS credentials and install AWS CLI before you start.
+Please make sure you have setup your AWS credentials and have installed AWS CLI before you start.
 
 ### System Design and Architecture
 
-I opted to use a event based Lambda function.
+I opted to use a event based architecture for this project.
 Loading a csv file to the S3 bucket will trigger an event which the lambda function will pick up and process.
 It will then convert the CSV file to JSON data and then write the data to a DynamoDB table.
-
+On completion the data file is moved to the `processed` folder and any error are written to the errors folder in the bucket. 
 
 ### Config file
 
 As this is a public repository, I will not be including my config files with the code.  
 I have included a template of the config file, and you just need to fill out the blanks.
-The config files use the following naming format: `config.<stage>.json`.  Stage could be `dev` or `prod`.
+The config files use the following naming format: `config.<stage>.json`.  Stage could be `dev` or `prod`, and should align with the stage that you deploy and invoke in yarn.
 
 There are the following value you will need to fill in.
 
@@ -57,7 +58,7 @@ In the `seed` folder is a test file that will be uploaded to S3 when you run the
 Run:
   
      yarn deploy:dev 
-     yarn:deploy:prod
+     yarn deploy:prod
      
 ## Invoke
 
@@ -67,3 +68,13 @@ Run:
      yarn invoke:prod
      
      
+## Tests
+
+Run:
+
+      yarn test
+     
+I did not add tests for the `s3`, `processing` and `validation`.   
+- `s3` is more of a facade class for the AWS S3 library.  
+- `processing` has no real logic, and just uses functions from other packages.  A integration test would be best in this case vs a unit test.
+- `validation` is a collection of object for the AJV JSON validation package. 
