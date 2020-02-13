@@ -50,9 +50,9 @@ export const processSubscriberFiles = async (Records: any[]): Promise<boolean> =
     try {
       // Cleanup the file.
       logger.debug('keys', { keyName, key: record.s3.object.key });
-      await s3Client.moveObject(record.s3.object.key, `processed/${keyName}`);
+      await s3Client.moveObject(record.s3.object.key, `processed/${new Date().toISOString()}-${keyName}`);
       const errorCsvBuffer = await getCsvFileBuffer(errorData);
-      await s3Client.putObject(`errors/${keyName}`, errorCsvBuffer);
+      await s3Client.putObject(`errors/${new Date().toISOString()}-${keyName}`, errorCsvBuffer);
     } catch (error) {
       logger.error('Error occurred during object cleanup', error);
       throw error
