@@ -1,5 +1,7 @@
 # Mock Radius Server DB
 
+![Node.js CI](https://github.com/LorneCurrie/file-importer/workflows/Node.js%20CI/badge.svg?branch=master)
+
 Just a fun project to explore uploading a list of contacts to a S3 bucket, triggering a lambda that then loads the CSV into a DynamoDB table.
 
 The Scenario is that you are a small ISP that has their RADIUS server setup in AWS. For those that are wondering what a RADIUS server is:
