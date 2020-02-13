@@ -1,8 +1,4 @@
 #!/bin/sh
-echo "here"
-#set -e
-#set -o
-
 # upload a file to S3
 
 stage=${1:-dev}
