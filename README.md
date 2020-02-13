@@ -60,13 +60,17 @@ Run:
      yarn deploy:dev 
      yarn deploy:prod
      
-## Invoke
+## Invoke function
 
+### Automated
 Run:
 
      yarn invoke:dev
      yarn invoke:prod
      
+### Manually
+     
+Manually upload the seed file to the `uploads/` in the S3 bucket.
      
 ## Tests
 
