@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "ajv": "6.11.0",
-    "aws-sdk": "2.614.0",
+    "aws-sdk": "2.814.0",
     "bcryptjs": "2.4.3",
     "csvtojson": "2.0.10",
     "jsonexport": "2.4.1",
